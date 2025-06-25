@@ -1,0 +1,2289 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEEX Store</title>
+  <link rel="icon" href="https://i.postimg.cc/2yKQBnmm/Whats-App-Image-2025-05-07-at-13-23-09.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #000000;
+      --secondary: #ffffff;
+      --accent: #ff0000;
+      --light-gray: #222222;
+      --dark-gray: #f5f5f5;
+      --success: #00aa00;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    body {
+      background-color: var(--primary);
+      color: var(--secondary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--primary);
+      color: var(--secondary);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #333;
+    }
+
+    .logo img {
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 1rem;
+    }
+
+    .nav-links a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.5rem 0;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: block;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Language Switcher */
+    .language-switcher {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .lang-btn {
+      background: transparent;
+      color: var(--secondary);
+      border: 1px solid #444;
+      padding: 0.2rem 0.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      transition: var(--transition);
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Cart Icon */
+    .cart-icon {
+      color: var(--secondary);
+      font-size: 1.2rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .cart-icon:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 70vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--secondary);
+      padding: 0 1rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-content h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      background: var(--accent);
+      color: var(--secondary);
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .btn:hover {
+      background: #cc0000;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+    }
+
+    /* Products Section */
+    .products {
+      padding: 3rem 1rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Product Card */
+    .product-card {
+      background: var(--light-gray);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--accent);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      z-index: 1;
+    }
+
+    .product-img {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    .product-price {
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .add-to-cart, .view-details {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      flex: 1;
+      transition: var(--transition);
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+
+    .add-to-cart {
+      background: var(--accent);
+      color: white;
+    }
+
+    .add-to-cart.added {
+      background: var(--success);
+    }
+
+    .add-to-cart:hover {
+      opacity: 0.9;
+    }
+
+    .view-details {
+      background: transparent;
+      color: var(--secondary);
+      border: 1px solid var(--secondary);
+    }
+
+    .view-details:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 350px;
+      height: 100vh;
+      background: var(--light-gray);
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+      transition: right 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+      z-index: 1000;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.active {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #444;
+      margin-bottom: 1rem;
+    }
+
+    .cart-header h3 {
+      font-size: 1.3rem;
+    }
+
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--secondary);
+      transition: var(--transition);
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .close-cart:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding-right: 0.5rem;
+    }
+
+    .cart-items::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .cart-items::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    .cart-item {
+      display: flex;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #444;
+    }
+
+    .cart-item-img {
+      width: 70px;
+      height: 70px;
+      margin-left: 0.8rem;
+      border-radius: 4px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .cart-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .cart-item-price {
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .quantity-btn {
+      background: #333;
+      color: white;
+      border: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+    }
+
+    .quantity {
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #999;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-right: auto;
+    }
+
+    .cart-item-remove:hover {
+      color: var(--accent);
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #999;
+    }
+
+    .cart-total {
+      font-weight: bold;
+      margin-bottom: 1rem;
+      text-align: left;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .whatsapp-checkout {
+      width: 100%;
+      padding: 0.8rem;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .whatsapp-checkout:hover {
+      background: #128C7E;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Product Modal */
+    .product-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .product-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: var(--light-gray);
+      border-radius: 8px;
+      width: 95%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalFadeIn 0.4s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--secondary);
+      z-index: 1;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .close-modal:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .product-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .product-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .main-image {
+      height: 400px;
+      overflow: hidden;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .main-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    }
+
+    .thumbnail-container {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+    }
+
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      border-radius: 5px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .thumbnail.active {
+      border-color: var(--accent);
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .gallery-nav-btn {
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .gallery-nav-btn:hover {
+      background: var(--accent);
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-price {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .product-description {
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .product-options {
+      margin-bottom: 2rem;
+    }
+
+    .option-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .option-title {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-weight: bold;
+    }
+
+    .color-options {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .color-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .color-option.active::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 0.8rem;
+    }
+
+    .size-options {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .size-option {
+      padding: 0.5rem 1rem;
+      border: 1px solid #444;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .size-option.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .add-to-cart-modal {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: auto;
+      transition: var(--transition);
+      font-size: 1.1rem;
+    }
+
+    .add-to-cart-modal:hover {
+      background: #cc0000;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: var(--secondary);
+      padding: 2rem 1rem;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .social-icons a {
+      color: var(--secondary);
+      font-size: 1.3rem;
+      transition: var(--transition);
+    }
+
+    .social-icons a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #aaa;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .copyright {
+      color: #777;
+      font-size: 0.8rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background: var(--light-gray);
+      z-index: 1002;
+      transition: right 0.4s ease;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu-links {
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .mobile-menu-links li {
+      margin-bottom: 1.5rem;
+    }
+
+    .mobile-menu-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .mobile-menu-links a:hover {
+      color: var(--accent);
+    }
+
+    .close-mobile-menu {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1.5rem;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* صفحات إضافية */
+    .page-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+    
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.2rem;
+      position: relative;
+    }
+    
+    .page-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--accent);
+    }
+    
+    .page-section {
+      margin-bottom: 2rem;
+    }
+    
+    .page-section h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+    
+    .page-section p {
+      margin-bottom: 1rem;
+    }
+    
+    .page-section ul {
+      padding-right: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .page-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Animations */
+    @keyframes dance {
+      0%, 100% { transform: rotate(0) scale(1); }
+      25% { transform: rotate(-10deg) scale(1.1); }
+      50% { transform: rotate(10deg) scale(1.1); }
+      75% { transform: rotate(-10deg) scale(1.1); }
+    }
+
+    .dance {
+      animation: dance 0.5s ease-in-out;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .product-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .main-image {
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+      
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+      
+      .cart-sidebar {
+        width: 350px;
+      }
+      
+      nav {
+        gap: 1rem;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .page-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      header {
+        padding: 1rem;
+      }
+      
+      .hero {
+        height: 70vh;
+      }
+      
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+      
+      .btn {
+        padding: 0.7rem 1.5rem;
+      }
+      
+      .cart-sidebar {
+        width: 100%;
+        max-width: 350px;
+      }
+      
+      .product-card {
+        max-width: 100%;
+      }
+      
+      .thumbnail {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .gallery-nav-btn {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    /* Top Alert Styles */
+    .top-alert {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      text-align: center;
+      z-index: 10000;
+      animation: slideDown 0.3s ease-out;
+    }
+    
+    .top-alert.success {
+      background: var(--success);
+      color: white;
+    }
+    
+    .top-alert.error {
+      background: var(--accent);
+      color: white;
+    }
+    
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Alert -->
+  <div class="top-alert" id="topAlert"></div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="logo">
+      <img src="https://i.postimg.cc/2yKQBnmm/Whats-App-Image-2025-05-07-at-13-23-09.jpg" alt="NEEX Logo">
+    </div>
+    <nav>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#home" data-i18n="home">الرئيسية</a></li>
+        <li><a href="#products" data-i18n="products">المنتجات</a></li>
+        <li><a href="#about" data-i18n="about">من نحن</a></li>
+        <li><a href="#contact" data-i18n="contact">اتصل بنا</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="language-switcher">
+          <button class="lang-btn active" data-lang="ar">العربية</button>
+          <button class="lang-btn" data-lang="en">English</button>
+        </div>
+        <a href="#" class="cart-icon">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <button class="close-mobile-menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <ul class="mobile-menu-links">
+      <li><a href="#home" data-i18n="home">الرئيسية</a></li>
+      <li><a href="#products" data-i18n="products">المنتجات</a></li>
+      <li><a href="#about" data-i18n="about">من نحن</a></li>
+      <li><a href="#contact" data-i18n="contact">اتصل بنا</a></li>
+      <li><a href="#terms" data-i18n="terms">الشروط والأحكام</a></li>
+    </ul>
+  </div>
+
+  <!-- Product Modal -->
+  <div class="product-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart -->
+  <div class="cart-sidebar">
+    <div class="cart-header">
+      <h3 data-i18n="cart">سلة التسوق</h3>
+      <button class="close-cart">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="cart-items">
+      <div class="cart-empty" data-i18n="empty_cart">سلة التسوق فارغة</div>
+    </div>
+    <div class="cart-total">
+      <span data-i18n="total">المجموع:</span>
+      <span class="total-price">0 درهم</span>
+    </div>
+    <button class="whatsapp-checkout">
+      <i class="fab fa-whatsapp"></i> <span data-i18n="whatsapp_checkout">إتمام الطلب عبر واتساب</span>
+    </button>
+  </div>
+  <div class="overlay"></div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page">
+      <!-- Hero Section -->
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <h1 data-i18n="hero_title">NEEX ليست علامة تجارية، إنها قصة</h1>
+          <p data-i18n="hero_subtitle">اكتشف أحدث تشكيلاتنا من الملابس</p>
+          <a href="#products" class="btn" data-i18n="browse_products">تصفح المنتجات</a>
+        </div>
+      </section>
+
+      <!-- Products Section -->
+      <section class="products" id="products">
+        <h2 class="section-title" data-i18n="our_products">منتجاتنا</h2>
+        <div class="products-grid">
+          <!-- Products will be loaded by JavaScript -->
+        </div>
+      </section>
+    </div>
+    
+    <!-- صفحة من نحن -->
+    <div id="about-page" class="page-content" style="display:none;">
+      <h1 class="page-title" data-i18n="about_us">من نحن</h1>
+      
+      <div class="page-section">
+        <h3 data-i18n="our_story">قصتنا</h3>
+        <p data-i18n="story_text">NEEX ليست مجرد علامة تجارية للملابس، إنها رحلة بدأت بشغف وتصميم على تقديم الأفضل. تأسست NEEX في عام 2025 بهدف تقديم منتجات عالية الجودة بتصاميم عصرية تناسب جميع الأذواق.</p>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="our_vision">رؤيتنا</h3>
+        <p data-i18n="vision_text">نحن نؤمن بأن الموضة يجب أن تكون متاحة للجميع، بدون المساومة على الجودة أو الأخلاقيات. نسعى لأن نكون الوجهة الأولى لكل من يبحث عن أناقة عصرية بلمسة فريدة.</p>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="our_team">فريقنا</h3>
+        <p data-i18n="team_text">خلف كل تصميم من تصميمات NEEX يقف فريق مبدع من المصممين والمهنيين الموهوبين الذين يعملون بجد لتحقيق رؤيتنا. نحن فخورون بثقافة العمل التعاوني والإبداعي التي نمتلكها.</p>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="our_values">قيمنا</h3>
+        <ul>
+          <li><strong data-i18n="quality">الجودة:</strong> <span data-i18n="quality_text">لا نتنازل عن معايير الجودة العالية في جميع منتجاتنا</span></li>
+          <li><strong data-i18n="creativity">الإبداع:</strong> <span data-i18n="creativity_text">نبتكر تصاميم فريدة تلهم عملائنا</span></li>
+          <li><strong data-i18n="transparency">الشفافية:</strong> <span data-i18n="transparency_text">نتعامل بصدق ووضوح مع عملائنا وشركائنا</span></li>
+          <li><strong data-i18n="sustainability">الاستدامة:</strong> <span data-i18n="sustainability_text">نحرص على تقليل تأثيرنا البيئي ونعتمد ممارسات مستدامة</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- صفحة الشروط والأحكام -->
+    <div id="terms-page" class="page-content" style="display:none;">
+      <h1 class="page-title" data-i18n="terms_title">شروط وأحكام الاستخدام</h1>
+      
+      <div class="page-section">
+        <h3 data-i18n="introduction">1. مقدمة</h3>
+        <p data-i18n="intro_text">مرحباً بكم في متجر NEEX الإلكتروني. يرجى قراءة هذه الشروط والأحكام بعناية قبل استخدام الموقع أو تقديم أي طلب.</p>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="orders_payment">2. الطلبات والدفع</h3>
+        <ul>
+          <li data-i18n="order_text1">جميع الأسعار تشمل الضريبة المضافة و توصيل</li>
+          <li data-i18n="order_text2">نحن نقبل طرق الدفع المتاحة على الموقع</li>
+          <li data-i18n="order_text3">الدفع يتم عند استلام الطلب ما لم يُذكر خلاف ذلك</li>
+          <li data-i18n="order_text4">نحتفظ بالحق في رفض أو إلغاء أي طلب في أي وقت</li>
+        </ul>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="shipping_delivery">3. الشحن والتسليم</h3>
+        <ul>
+          <li data-i18n="shipping_text1">نحن نقدم الشحن لجميع أنحاء المغرب</li>
+          <li data-i18n="shipping_text2">مدة التوصيل تتراوح بين 2-5 أيام عمل حسب المنطقة</li>
+          <li data-i18n="shipping_text3">سيتم إعلامك بتفاصيل الشحن بعد تأكيد الطلب</li>
+          <li data-i18n="shipping_text4">أي تأخير خارج عن إرادتنا لا يخول لأي تعويض</li>
+        </ul>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="returns_exchanges">4. الإرجاع والاستبدال</h3>
+        <ul>
+          <li data-i18n="return_text1">يمكنك إرجاع النتج خلال 3 أيام من استلامه</li>
+          <li data-i18n="return_text2">يجب أن يكون المنتج بحالته الأصلية وبعبواته الأصلية</li>
+          <li data-i18n="return_text3">لا نقبل إرجاع المنتجات المستعملة أو التالفة</li>
+          <li data-i18n="return_text4">سيتم خصم أي تكاليف شحن من مبلغ الاسترداد</li>
+        </ul>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="privacy">5. الخصوصية</h3>
+        <p data-i18n="privacy_text">نحن نحترم خصوصيتك. جميع البيانات التي تقدمها محمية وفقاً لسياسة الخصوصية الخاصة بنا. لن نشارك معلوماتك مع أي أطراف ثالثة بدون موافقتك.</p>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="modifications">6. التعديلات</h3>
+        <p data-i18n="modifications_text">نحتفظ بالحق في تعديل هذه الشروط والأحكام في أي وقت. يرجى مراجعة هذه الصفحة بشكل دوري للاطلاع على أي تغييرات.</p>
+      </div>
+    </div>
+    
+    <!-- صفحة الاتصال -->
+    <div id="contact-page" class="page-content" style="display:none;">
+      <h1 class="page-title" data-i18n="contact_us">اتصل بنا</h1>
+      
+      <div class="page-section">
+        <h3 data-i18n="contact_info">بيانات التواصل</h3>
+        <ul>
+          <li><i class="fas fa-phone"></i> <span data-i18n="phone">الهاتف:</span> +212782738492</li>
+          <li><i class="fas fa-envelope"></i> <span data-i18n="email">البريد الإلكتروني:</span> neex.2025.05@gmail.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="address">العنوان:</span> المغرب</li>
+        </ul>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="social_media">وسائل التواصل الاجتماعي</h3>
+        <div class="social-icons" style="justify-content: flex-start; gap: 1.5rem;">
+          <a href="https://www.instagram.com/neex.001" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="https://www.tiktok.com/@neex036" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+          <a href="https://youtube.com/@neex-001" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+          <a href="https://www.facebook.com/share/14osyD6rJD/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+        </div>
+      </div>
+      
+      <div class="page-section">
+        <h3 data-i18n="working_hours">أوقات العمل</h3>
+        <ul>
+          <li data-i18n="working_days">من الإثنين إلى الجمعة: 9 صباحاً - 6 مساءً</li>
+          <li data-i18n="saturday">السبت: 10 صباحاً - 4 مساءً</li>
+          <li data-i18n="sunday">الأحد: مغلق</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/neex.001" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@neex036" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://youtube.com/@neex-001" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.facebook.com/share/14osyD6rJD/" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+    <div class="footer-links">
+      <a href="#home" data-i18n="home">الرئيسية</a>
+      <a href="#products" data-i18n="products">المنتجات</a>
+      <a href="#about" data-i18n="about">من نحن</a>
+      <a href="#contact" data-i18n="contact">اتصل بنا</a>
+      <a href="#terms" data-i18n="terms">الشروط والأحكام</a>
+    </div>
+    <p class="copyright" data-i18n="copyright">© 2025 NEEX Store. جميع الحقوق محفوظة</p>
+  </footer>
+
+  <script>
+    // بيانات المنتجات مع عدة صور لكل منتج
+    const products = [
+      {
+        id: 1,
+        title: "SKULL CRAZE",
+        title_en: "SKULL CRAZE",
+        price: 200,
+        images: [
+          "https://i.postimg.cc/CM9WJyqg/Picsart-25-06-23-20-33-30-305.jpg",
+          "https://i.postimg.cc/zBCzCnJs/Picsart-25-06-17-13-14-21-694.jpg", 
+          "https://i.postimg.cc/SxRxB2r9/Picsart-25-06-17-13-16-08-473.jpg",
+          "https://i.postimg.cc/ZRGfSdp5/Picsart-25-06-17-13-12-20-974.jpg",
+          "https://i.postimg.cc/cJ3JHJMr/Picsart-25-06-17-13-09-00-801.jpg",
+        ],
+        description: "قميص NEEX بلمسة فنية تجمع بين الغموض والإبداع، مصنوع من قطن عالي الجودة ومريح في اللبس. تصميم الجمجمة بالألوان الجريئة يعطيك ستايل فريد وعصري، مثالي للخروجات ولإبراز شخصيتك المختلفة. متوفر بمقاسات متنوعة",
+        description_en: "The NEEX t-shirt features an artistic touch that blends mystery and creativity. Made from high-quality cotton, it offers both comfort and style. The bold skull design adds a unique and modern flair, perfect for outings and expressing your individuality. Available in various sizes",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 2,
+        title: "NEEX FLOW",
+        title_en: "NEEX FLOW",
+        price: 180,
+        images: [
+          "https://i.postimg.cc/43xrL2nZ/Picsart-25-06-23-12-38-03-430.jpg",
+          "https://i.postimg.cc/9MMC9Fyd/Picsart-25-06-23-12-34-16-009.jpg",
+          "https://i.postimg.cc/sgqNmfFP/Picsart-25-06-23-12-32-33-449.jpg",
+          "https://i.postimg.cc/hGCbspQk/Picsart-25-06-23-12-30-48-316.jpg",
+          "https://i.postimg.cc/zXjLT3gM/Picsart-25-06-23-12-30-04-955.jpg",
+        ],
+        description:  "قميص NEEX بلمسة زخرفية فريدة في الشعار، تصميم بسيط وأنيق يعطيك إطلالة شبابية وعصرية. مصنوع من قطن مريح وعالي الجودة، مناسب لكل الأوقات والمناسبات. متوفر بألوان ومقاسات متنوعة.",
+        description_en: "This NEEX t-shirt features a unique, artistic logo design that adds a stylish and youthful vibe. Crafted from high-quality cotton for maximum comfort, it’s the perfect choice for any occasion. Available in multiple colors and sizes.",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 3,
+        title: "NEEX SPLIT CODE",
+        title_en: "NEEX SPLIT CODE",
+        price: 180,
+        images: [
+          "https://i.postimg.cc/LXwWCHZF/Picsart-25-06-23-17-04-44-108.jpg",
+          "https://i.postimg.cc/prQBfxfZ/Picsart-25-06-23-17-04-04-647.jpg",
+          "https://i.postimg.cc/tJDxRgdL/Picsart-25-06-23-17-03-24-026.jpg",
+          "https://i.postimg.cc/9QwrKbS3/Picsart-25-06-23-17-02-33-569.jpg",
+          "https://i.postimg.cc/v8S8y95G/Picsart-25-06-23-17-01-41-385.jpg",
+          "https://i.postimg.cc/DyXhKN2c/Picsart-25-06-23-17-00-44-838.jpg",
+          "https://i.postimg.cc/wvMK4ffL/Picsart-25-06-23-16-59-55-325.jpg",
+          "https://i.postimg.cc/nhxhSxvm/Picsart-25-06-23-16-58-53-503.jpg",
+          "https://i.postimg.cc/3x33CBTC/Picsart-25-06-23-16-57-50-686.jpg",
+        ],
+        description: "تيشرت بستايل الشارع الجريء، مع شعار NEEX بحروف كبيرة وواضحة تمنحك مظهر قوي ولافت. اللون الأصفر المشرق يضيف طاقة وجرأة لإطلالتك. مصنوع من قطن ناعم ومتين، مثالي للارتداء اليومي أو المناسبات الكاجوال. متوفر بعدة ألوان ومقاسات.",
+        description_en: "A bold streetwear-inspired t-shirt featuring the NEEX logo in large, standout letters. The bright yellow color adds energy and confidence to your look. Made from soft, durable cotton—perfect for everyday wear or casual occasions. Available in various colors and sizes.",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 4,
+        title: "NEEX REAPER",
+        title_en: "NEEX REAPER",
+        price: 200,
+        images: [ 
+		  "https://i.postimg.cc/Kz5YcK7x/IMG-20250624-191049.jpg",
+          "https://i.postimg.cc/6QgP7z0h/IMG-20250624-191013.jpg",
+          "https://i.postimg.cc/qq0jnFC2/Picsart-25-06-17-13-27-54-341.jpg",
+          "https://i.postimg.cc/bwMgLrty/Picsart-25-06-17-13-26-03-480.jpg",                                            
+		  "https://i.postimg.cc/JnRkQCP7/Picsart-25-06-17-13-22-06-892.jpg",
+          "https://i.postimg.cc/fyrSZtZk/Picsart-25-06-17-13-20-06-005.jpg",
+        ],
+        description: "اكتشف جرأة التصميم مع هذا التيشرت الفريد من NEEX. جمجمة ذائبة بألوان صفراء    تمنحك مظهراً لا يُنسى، وتعبّر عن شخصية متمرّدة وعاشقة للفن والشارع. التيشرت مصنوع من قطن ناعم ومتين، مناسب للإطلالات اليومية ولمن يبحث عن التميز والاختلاف. متوفر بعدة مقاسات",
+        description_en: "Unleash bold energy with this standout NEEX T-shirt. Featuring a melting yellow  , it captures the spirit of rebellion and street art. Made from soft and durable cotton, it's the perfect piece for daily wear and for those who dare to be different. Available in multiple sizes.",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 5,
+        title: "NEEX ECHO",
+        title_en: "NEEX ECHO",
+        price: 180,
+        images: [
+          "https://i.postimg.cc/BQ4zhZhH/Picsart-25-06-23-15-44-41-944.jpg",
+          "https://i.postimg.cc/SRqgtVGk/Picsart-25-06-23-15-43-39-029.jpg",
+          "https://i.postimg.cc/SQvXdjQt/Picsart-25-06-23-15-42-49-242.jpg",
+          "https://i.postimg.cc/8ztsFCYH/Picsart-25-06-23-15-41-53-083.jpg",
+          "https://i.postimg.cc/Gm5dwTNZ/Picsart-25-06-23-15-40-12-418.jpg",
+          "https://i.postimg.cc/ZRLQm1nC/Picsart-25-06-23-12-45-45-886.jpg",
+        ],
+        description: "تيشرت NEEX ECHO يجمع بين البساطة والجرأة بتصميم يكرر شعار NEEX بشكل إيقاعي عصري. الألوان المتعددة تضيف لمسة حيوية، والخامة القطنية الخفيفة تمنحك راحة مثالية خلال الصيف أو في خروجاتك اليومية. إذا كنت من عشاق التميز والبساطة الجذابة، فـ ECHO هو اختيارك. مقاس واحد يناسب الجميع",
+        description_en: "The NEEX ECHO T-shirt brings together simplicity and boldness with a rhythmic repetition of the NEEX logo. Available in multiple vibrant colors, its lightweight cotton fabric ensures ultimate comfort for summer days or casual outings. If you're into standout minimalism — ECHO is made for you. One size fits all",
+        sizes: ["M", "L", "XL"]
+      },
+      {
+        id: 6,
+        title: "NEEX ECHO // BLACKOUT",
+        title_en: "NEEX ECHO // BLACKOUT",
+        price: 180,
+        images: [
+          "https://i.postimg.cc/VLD9Bzr7/Picsart-25-06-21-09-50-26-576.jpg",
+          "https://i.postimg.cc/T18xs8KF/Picsart-25-06-22-15-51-10-810.jpg",
+          "https://i.postimg.cc/W3LfLs7G/Picsart-25-06-22-15-49-49-843.jpg",
+          "https://i.postimg.cc/JzsTss63/Picsart-25-06-22-15-48-38-644.jpg",
+          "https://i.postimg.cc/gkJs7wW9/Picsart-25-06-21-09-49-36-668.jpg",         
+        ],
+        description: "نسخة سوداء أنيقة من تيشرت NEEX ECHO، تجمع بين التكرار الجريء للشعار ولون أسود يوحي بالقوة والغموض. تصميم عصري ومميز لعشاق الإطلالة الجادة والمتمردة. مصنوع من قطن مريح وخفيف، مثالي للارتداء اليومي أو للخروجات الليلية بأسلوب عصري. متوفر بمقاسات مختلفة.",
+        description_en: "The boldest version of NEEX ECHO yet. This BLACKOUT edition brings the iconic repeated logo to life in a sleek, all-black design — where silence meets power. Perfect for those who prefer a darker, edgier vibe. Crafted from soft, breathable cotton for everyday comfort. Available in multiple sizes.",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 7,
+        title: "NEEX VENOM SMILE",
+        title_en: "NEEX VENOM SMILE",
+        price: 200,
+        images: [
+          "https://i.postimg.cc/CM9WJyqg/Picsart-25-06-23-20-33-30-305.jpg",
+          "https://i.postimg.cc/zBCzCnJs/Picsart-25-06-17-13-14-21-694.jpg",
+          "https://i.postimg.cc/SxRxB2r9/Picsart-25-06-17-13-16-08-473.jpg",
+		  "https://i.postimg.cc/HnNjgK5b/Picsart-25-06-17-13-09-00-801-1.jpg",
+		  "https://i.postimg.cc/CMRqvHbb/Picsart-25-06-17-13-11-30-521.jpg",
+        ],
+        description: "قميص قطني ناعم بتصميم فني جريء يجمع بين الابتسامة والجمجمة، مثالي لعشاق التميز وستايل الشارع.",
+        description_en: "Soft cotton tee with a bold graphic mixing a smiley and skull — perfect for streetwear lovers and those who stand out.",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 8,
+        title: "NEEX TOXIC HEAT",
+        title_en: "NEEX TOXIC HEAT",
+        price: 200,
+        images: [    
+          "https://i.postimg.cc/P5tJcQ1K/IMG-20250624-190813.jpg",
+          "https://i.postimg.cc/rwQsLRJT/IMG-20250624-190741.jpg",
+          "https://i.postimg.cc/PJWfVCxB/Picsart-25-06-16-20-27-02-186.jpg",
+          "https://i.postimg.cc/Kv5vn3CT/Picsart-25-06-16-20-27-46-123.jpg",
+          "https://i.postimg.cc/HksW3sCh/Picsart-25-06-16-20-23-37-397.jpg",
+          "https://i.postimg.cc/QC3h7jbS/Picsart-25-06-16-20-19-45-121.jpg",
+        ],
+        description: "قميص قطني رائع، مع لوحة فنية عبارة عن لهب ذائب يحمل توقيع NEEX.مثالي لكل من يعشق التميز والانفجار الهادئ للأناقة",
+        description_en: "A premium cotton tee featuring a stunning artwork — melting flames signed by NEEX.Perfect for those who love bold style with quiet intensity.",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 9,
+        title: "FROST KING",
+        title_en: "NEEX FROST KING",
+        price: 200,
+        images: [
+          "https://i.postimg.cc/hGWXgBLK/IMG-20250624-224239.jpg",
+          "https://i.postimg.cc/3xpwtcPV/Picsart-25-06-14-12-13-21-942.jpg",
+          "https://i.postimg.cc/ZRfY9tdB/Picsart-25-06-14-12-14-48-228.jpg",
+          "https://i.postimg.cc/vmYd52MW/Picsart-25-06-14-12-15-51-074.jpg",
+          "https://i.postimg.cc/HnXp6JN5/Picsart-25-06-14-12-16-42-438.jpg",  
+          "https://i.postimg.cc/gjqCw35M/Picsart-25-06-14-12-52-15-272.jpg",
+          "https://i.postimg.cc/NfK8jQHX/Picsart-25-06-14-12-43-50-681.jpg",
+        ],
+        description: "قميص قطني أسود، عليه سانتا بحلّة محاربة وتوقيع NEEX.مش بهجة... هادي هيبة شتوية، لناس ما كيركعوش للروتي",
+        description_en: "Black cotton tee with a warrior-style Santa and NEEX signature.Not just festive — it’s winter dominance for those who don’t kneel to routine.",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 10,
+        title: "NEEX FROST",
+        title_en: "NEEX FROST",
+        price: 180,
+        images: [
+          "https://i.postimg.cc/mDhJwtDw/Picsart-25-06-23-15-52-03-996.jpg",
+          "https://i.postimg.cc/V63GWg2f/Picsart-25-06-23-15-51-10-248.jpg",
+          "https://i.postimg.cc/CMq6xyfz/Picsart-25-06-23-15-48-31-018.jpg",
+          "https://i.postimg.cc/HsnTVkdT/Picsart-25-06-23-15-47-36-481.jpg",
+          "https://i.postimg.cc/GpFCZBJx/Picsart-25-06-23-15-46-30-594.jpg",
+        ],
+        description: "قميص قطني ناصع، بتوقيع NEEX الجليدي.تصميم نقي وبارد، كيحمل هيبة الصمت وهدوء الواثقين",
+        description_en: "Crisp cotton tee with an icy NEEX signature.Clean, bold design — calm power for the confident.",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 11,
+        title: "NEEX SIGNAL",
+        title_en: "NEEX SIGNAL",
+        price: 180,
+        images: [
+          "https://i.postimg.cc/fyryJ3P0/IMG-20250624-191211.jpg",
+          "https://i.postimg.cc/DwdhNJcd/IMG-20250624-191236.jpg",
+          "https://i.postimg.cc/Nf0cch3Z/Picsart-25-06-25-21-21-28-563.jpg",
+		  "https://i.postimg.cc/28gXXPrQ/Picsart-25-06-25-21-20-46-015.jpg",
+		  "https://i.postimg.cc/Hn9X48Yv/Picsart-25-06-25-21-19-40-246.jpg",
+		  "https://i.postimg.cc/SKY91vQM/Picsart-25-06-25-21-18-57-195.jpg",
+        ],
+        description: "قميص قطني أنيق متوفر بألوان زاهية، مزين بشعار NEEX البارز بحال سينيال وسط الزحام، كيشعل أناقة ويأمر بالانتباه.",
+        description_en: "A stylish cotton tee available in vibrant colors, featuring a bold NEEX logo – like a signal in the crowd, it radiates confidence and demands attention",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+      {
+        id: 12,
+        title: "NEEX VISION",
+        title_en: "NEEX VISION",
+        price: 180,
+        images: [ 
+		  "https://i.postimg.cc/L6Vv0LWV/Picsart-25-06-25-12-33-13-698.jpg",
+          "https://i.postimg.cc/zf4kRjLq/Picsart-25-06-25-12-32-26-217.jpg",
+          "https://i.postimg.cc/zvrSxGSM/Picsart-25-06-25-12-31-39-940.jpg",
+          "https://i.postimg.cc/7P3NfSqy/Picsart-25-06-25-12-22-24-316.jpg",
+          "https://i.postimg.cc/8PwBbDFK/Picsart-25-06-25-12-17-56-146.jpg",
+        ],
+        description: "قميص قطني فاخر بتصميم عصري وشعار NEEX ثلاثي الأبعاد، متوفر بألوان متعددة تناسب كل الأذواق.",
+        description_en: "Premium cotton t-shirt with a bold 3D NEEX logo — available in multiple colors to match every style",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+	  {
+        id: 13,
+        title: "TOO OLD",
+        title_en: "TOO OLD",
+        price: 200,
+        images: [ 
+		  "https://i.postimg.cc/CLddWVP6/Picsart-25-06-25-12-41-28-538.jpg",
+          "https://i.postimg.cc/BvCqjh7K/Picsart-25-06-25-12-36-40-294.jpg",
+          "https://i.postimg.cc/Z5tZVk1N/Picsart-25-06-25-12-50-28-774.jpg",
+          "https://i.postimg.cc/t4jJ7VR8/Picsart-25-06-25-12-51-34-147.jpg",
+          "https://i.postimg.cc/GmLRZPm3/Picsart-25-06-25-12-37-40-792.jpg",
+        ],
+        description: "قميص قطني بجودة عالية، مزين بعبارة تعبر عن القوة والموقف. تصميم عصري يلفت الانتباه ويعبّر عن شخصية لا تقبل التفاهة.",
+        description_en: "High-quality cotton tee with a bold phrase that speaks attitude. A modern design that turns heads and tells the world you’ve had enough.",
+        sizes: ["M", "L", "XL", "XXL"]
+      },
+    ];
+
+    // عناصر DOM
+    const productsGrid = document.querySelector('.products-grid');
+    const cartItemsEl = document.querySelector('.cart-items');
+    const cartCountEl = document.querySelector('.cart-count');
+    const totalPriceEl = document.querySelector('.total-price');
+    const cartSidebar = document.querySelector('.cart-sidebar');
+    const overlay = document.querySelector('.overlay');
+    const cartIcon = document.querySelector('.cart-icon');
+    const closeCartBtn = document.querySelector('.close-cart');
+    const whatsappCheckoutBtn = document.querySelector('.whatsapp-checkout');
+    const productModal = document.querySelector('.product-modal');
+    const modalBody = document.querySelector('.modal-body');
+    const closeModalBtn = document.querySelector('.close-modal');
+    const topAlert = document.getElementById('topAlert');
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const closeMobileMenuBtn = document.querySelector('.close-mobile-menu');
+
+    // سلة التسوق
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentImageIndex = 0;
+    let currentLanguage = 'ar';
+
+    // ترجمة النصوص
+    const translations = {
+      ar: {
+        home: "الرئيسية",
+        products: "المنتجات",
+        about: "من نحن",
+        contact: "اتصل بنا",
+        terms: "الشروط والأحكام",
+        cart: "سلة التسوق",
+        empty_cart: "سلة التسوق فارغة",
+        total: "المجموع:",
+        whatsapp_checkout: "إتمام الطلب عبر واتساب",
+        hero_title: "NEEX ليست علامة تجارية، إنها قصة",
+        hero_subtitle: "اكتشف أحدث تشكيلاتنا من الملابس",
+        browse_products: "تصفح المنتجات",
+        our_products: "منتجاتنا",
+        about_us: "من نحن",
+        our_story: "قصتنا",
+        story_text: "NEEX ليست مجرد علامة تجارية للملابس، إنها رحلة بدأت بشغف وتصميم على تقديم الأفضل. تأسست NEEX في عام 2025 بهدف تقديم منتجات عالية الجودة بتصاميم عصرية تناسب جميع الأذواق.",
+        our_vision: "رؤيتنا",
+        vision_text: "نحن نؤمن بأن الموضة يجب أن تكون متاحة للجميع، بدون المساومة على الجودة أو الأخلاقيات. نسعى لأن نكون الوجهة الأولى لكل من يبحث عن أناقة عصرية بلمسة فريدة.",
+        our_team: "فريقنا",
+        team_text: "خلف كل تصميم من تصميمات NEEX يقف فريق مبدع من المصممين والمهنيين الموهوبين الذين يعملون بجد لتحقيق رؤيتنا. نحن فخورون بثقافة العمل التعاوني والإبداعي التي نمتلكها.",
+        our_values: "قيمنا",
+        quality: "الجودة:",
+        quality_text: "لا نتنازل عن معايير الجودة العالية في جميع منتجاتنا",
+        creativity: "الإبداع:",
+        creativity_text: "نبتكر تصاميم فريدة تلهم عملائنا",
+        transparency: "الشفافية:",
+        transparency_text: "نتعامل بصدق ووضوح مع عملائنا وشركائنا",
+        sustainability: "الاستدامة:",
+        sustainability_text: "نحرص على تقليل تأثيرنا البيئي ونعتمد ممارسات مستدامة",
+        terms_title: "شروط وأحكام الاستخدام",
+        introduction: "1. مقدمة",
+        intro_text: "مرحباً بكم في متجر NEEX الإلكتروني. يرجى قراءة هذه الشروط والأحكام بعناية قبل استخدام الموقع أو تقديم أي طلب.",
+        orders_payment: "2. الطلبات والدفع",
+        order_text1: "جميع الأسعار تشمل الضريبة المضافة و توصيل",
+        order_text2: "نحن نقبل طرق الدفع المتاحة على الموقع",
+        order_text3: "الدفع يتم عند استلام الطلب ما لم يُذكر خلاف ذلك",
+        order_text4: "نحتفظ بالحق في رفض أو إلغاء أي طلب في أي وقت",
+        shipping_delivery: "3. الشحن والتسليم",
+        shipping_text1: "نحن نقدم الشحن لجميع أنحاء المغرب",
+        shipping_text2: "مدة التوصيل تتراوح بين 2-5 أيام عمل حسب المنطقة",
+        shipping_text3: "سيتم إعلامك بتفاصيل الشحن بعد تأكيد الطلب",
+        shipping_text4: "أي تأخير خارج عن إرادتنا لا يخول لأي تعويض",
+        returns_exchanges: "4. الإرجاع والاستبدال",
+        return_text1: "يمكنك إرجاع النتج خلال 3 أيام من استلامه",
+        return_text2: "يجب أن يكون المنتج بحالته الأصلية وبعبواته الأصلية",
+        return_text3: "لا نقبل إرجاع المنتجات المستعملة أو التالفة",
+        return_text4: "سيتم خصم أي تكاليف شحن من مبلغ الاسترداد",
+        privacy: "5. الخصوصية",
+        privacy_text: "نحن نحترم خصوصيتك. جميع البيانات التي تقدمها محمية وفقاً لسياسة الخصوصية الخاصة بنا. لن نشارك معلوماتك مع أي أطراف ثالثة بدون موافقتك.",
+        modifications: "6. التعديلات",
+        modifications_text: "نحتفظ بالحق في تعديل هذه الشروط والأحكام في أي وقت. يرجى مراجعة هذه الصفحة بشكل دوري للاطلاع على أي تغييرات.",
+        contact_us: "اتصل بنا",
+        contact_info: "بيانات التواصل",
+        phone: "الهاتف:",
+        email: "البريد الإلكتروني:",
+        address: "العنوان:",
+        social_media: "وسائل التواصل الاجتماعي",
+        working_hours: "أوقات العمل",
+        working_days: "من الإثنين إلى الجمعة: 9 صباحاً - 6 مساءً",
+        saturday: "السبت: 10 صباحاً - 4 مساءً",
+        sunday: "الأحد: مغلق",
+        copyright: "© 2025 NEEX Store. جميع الحقوق محفوظة",
+        added_to_cart: "تمت الإضافة إلى السلة",
+        add_to_cart: "أضف إلى السلة",
+        details: "التفاصيل",
+        view_details: "عرض التفاصيل",
+        added: "تمت الإضافة"
+      },
+      en: {
+        home: "Home",
+        products: "Products",
+        about: "About Us",
+        contact: "Contact Us",
+        terms: "Terms & Conditions",
+        cart: "Shopping Cart",
+        empty_cart: "Your cart is empty",
+        total: "Total:",
+        whatsapp_checkout: "Checkout via WhatsApp",
+        hero_title: "NEEX is not a brand, it's a story",
+        hero_subtitle: "Discover our latest clothing collections",
+        browse_products: "Browse Products",
+        our_products: "Our Products",
+        about_us: "About Us",
+        our_story: "Our Story",
+        story_text: "NEEX is not just a clothing brand, it's a journey that started with passion and determination to deliver the best. NEEX was founded in 2025 with the aim of providing high-quality products with modern designs that suit all tastes.",
+        our_vision: "Our Vision",
+        vision_text: "We believe that fashion should be accessible to everyone, without compromising on quality or ethics. We strive to be the first destination for anyone looking for modern elegance with a unique touch.",
+        our_team: "Our Team",
+        team_text: "Behind every NEEX design stands a creative team of talented designers and professionals who work hard to achieve our vision. We are proud of the collaborative and creative work culture we have.",
+        our_values: "Our Values",
+        quality: "Quality:",
+        quality_text: "We do not compromise on high quality standards in all our products",
+        creativity: "Creativity:",
+        creativity_text: "We create unique designs that inspire our customers",
+        transparency: "Transparency:",
+        transparency_text: "We deal with honesty and clarity with our customers and partners",
+        sustainability: "Sustainability:",
+        sustainability_text: "We are keen to reduce our environmental impact and adopt sustainable practices",
+        terms_title: "Terms and Conditions",
+        introduction: "1. Introduction",
+        intro_text: "Welcome to NEEX online store. Please read these Terms and Conditions carefully before using the site or placing any order.",
+        orders_payment: "2. Orders & Payment",
+        order_text1: "All prices include VAT and delivery",
+        order_text2: "We accept payment methods available on the site",
+        order_text3: "Payment is made upon receipt of the order unless otherwise stated",
+        order_text4: "We reserve the right to refuse or cancel any order at any time",
+        shipping_delivery: "3. Shipping & Delivery",
+        shipping_text1: "We ship to all regions in Morocco",
+        shipping_text2: "Delivery time ranges between 2-5 working days depending on the region",
+        shipping_text3: "You will be informed of shipping details after order confirmation",
+        shipping_text4: "Any delay beyond our control does not entitle any compensation",
+        returns_exchanges: "4. Returns & Exchanges",
+        return_text1: "You can return the product within 3 days of receipt",
+        return_text2: "The product must be in its original condition and packaging",
+        return_text3: "We do not accept returns of used or damaged products",
+        return_text4: "Any shipping costs will be deducted from the refund amount",
+        privacy: "5. Privacy",
+        privacy_text: "We respect your privacy. All data you provide is protected according to our privacy policy. We will not share your information with any third parties without your consent.",
+        modifications: "6. Modifications",
+        modifications_text: "We reserve the right to modify these Terms and Conditions at any time. Please review this page periodically for any changes.",
+        contact_us: "Contact Us",
+        contact_info: "Contact Information",
+        phone: "Phone:",
+        email: "Email:",
+        address: "Address:",
+        social_media: "Social Media",
+        working_hours: "Working Hours",
+        working_days: "Monday to Friday: 9 AM - 6 PM",
+        saturday: "Saturday: 10 AM - 4 PM",
+        sunday: "Sunday: Closed",
+        copyright: "© 2025 NEEX Store. All Rights Reserved",
+        added_to_cart: "Added to Cart",
+        add_to_cart: "Add to Cart",
+        details: "Details",
+        view_details: "View Details",
+        added: "Added"
+      }
+    };
+
+    // تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+      updateCart();
+      handleNavLinks();
+      
+      // عرض الصفحة المناسبة حسب الهاش
+      if (window.location.hash === '#about') {
+        showPage('about-page');
+      } else if (window.location.hash === '#terms') {
+        showPage('terms-page');
+      } else if (window.location.hash === '#contact') {
+        showPage('contact-page');
+      } else if (window.location.hash === '#products') {
+        showPage('home-page');
+        setTimeout(() => {
+          document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else {
+        showPage('home-page');
+      }
+    });
+
+    // عرض المنتجات
+    function renderProducts() {
+      productsGrid.innerHTML = '';
+      
+      products.forEach(product => {
+        const isInCart = cart.some(item => item.id === product.id);
+        
+        const productEl = document.createElement('div');
+        productEl.classList.add('product-card');
+        productEl.dataset.id = product.id;
+        productEl.innerHTML = `
+          <div class="product-img">
+            <img src="${product.images[0]}" alt="${currentLanguage === 'ar' ? product.title : product.title_en}" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${currentLanguage === 'ar' ? product.title : product.title_en}</h3>
+            <div class="product-price">${product.price} ${currentLanguage === 'ar' ? 'درهم' : 'MAD'}</div>
+            <div class="product-actions">
+              <button class="view-details" data-i18n="view_details">${currentLanguage === 'ar' ? 'التفاصيل' : 'Details'}</button>
+              <button class="add-to-cart ${isInCart ? 'added' : ''}" data-i18n="${isInCart ? 'added' : 'add_to_cart'}">
+                ${isInCart ? (currentLanguage === 'ar' ? 'تمت الإضافة' : 'Added') : (currentLanguage === 'ar' ? 'أضف للسلة' : 'Add to Cart')}
+              </button>
+            </div>
+          </div>
+        `;
+        productsGrid.appendChild(productEl);
+      });
+      
+      // تحديث النصوص المترجمة
+      updateTranslations();
+    }
+
+    // عرض محتويات السلة
+    function renderCartItems() {
+      cartItemsEl.innerHTML = '';
+      
+      if (cart.length === 0) {
+        cartItemsEl.innerHTML = `<div class="cart-empty" data-i18n="empty_cart">${currentLanguage === 'ar' ? 'سلة التسوق فارغة' : 'Your cart is empty'}</div>`;
+        return;
+      }
+      
+      cart.forEach(item => {
+        const cartItemEl = document.createElement('div');
+        cartItemEl.classList.add('cart-item');
+        cartItemEl.innerHTML = `
+          <div class="cart-item-img">
+            <img src="${item.images[0]}" alt="${currentLanguage === 'ar' ? item.title : item.title_en}" loading="lazy">
+          </div>
+          <div class="cart-item-details">
+            <h4 class="cart-item-title">${currentLanguage === 'ar' ? item.title : item.title_en}</h4>
+            <p class="cart-item-price">${item.price} ${currentLanguage === 'ar' ? 'درهم' : 'MAD'} × ${item.quantity}</p>
+            <div class="cart-item-controls">
+              <button class="cart-item-remove" data-id="${item.id}" data-i18n="remove">${currentLanguage === 'ar' ? 'إزالة' : 'Remove'}</button>
+              <div class="quantity-control">
+                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                <span class="quantity">${item.quantity}</span>
+                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+              </div>
+            </div>
+          </div>
+        `;
+        cartItemsEl.appendChild(cartItemEl);
+      });
+      
+      updateCartTotal();
+      updateTranslations();
+    }
+
+    // تحديث إجمالي السلة
+    function updateCartTotal() {
+      const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+      const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+      
+      cartCountEl.textContent = totalItems;
+      totalPriceEl.textContent = `${totalPrice} ${currentLanguage === 'ar' ? 'درهم' : 'MAD'}`;
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // إضافة منتج إلى السلة
+    function addToCart(productId) {
+      const product = products.find(item => item.id == productId);
+      const existingItem = cart.find(item => item.id == productId);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          ...product,
+          quantity: 1
+        });
+      }
+      
+      updateCart();
+      showAlert(currentLanguage === 'ar' ? 'تمت إضافة المنتج إلى السلة بنجاح' : 'Product added to cart successfully', 'success');
+    }
+
+    // تحديث السلة
+    function updateCart() {
+      renderCartItems();
+      renderProducts();
+      updateCartTotal();
+    }
+
+    // إزالة منتج من السلة
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id != productId);
+      updateCart();
+      showAlert(currentLanguage === 'ar' ? 'تمت إزالة المنتج من السلة' : 'Product removed from cart', 'error');
+    }
+
+    // تغيير كمية المنتج
+    function changeQuantity(productId, action) {
+      const item = cart.find(item => item.id == productId);
+      
+      if (action === 'plus') {
+        item.quantity += 1;
+      } else if (action === 'minus') {
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+        } else {
+          removeFromCart(productId);
+          return;
+        }
+      }
+      
+      updateCart();
+    }
+
+    // عرض التنبيهات
+    function showAlert(message, type) {
+      topAlert.textContent = message;
+      topAlert.className = `top-alert ${type}`;
+      topAlert.style.display = 'block';
+      
+      setTimeout(() => {
+        topAlert.style.display = 'none';
+      }, 3000);
+    }
+
+    // تغيير الصورة الرئيسية في المعرض
+    function changeMainImage(images, index) {
+      const mainImage = document.querySelector('.main-image img');
+      mainImage.style.opacity = 0;
+      
+      setTimeout(() => {
+        mainImage.src = images[index];
+        mainImage.style.opacity = 1;
+      }, 300);
+      
+      // تحديث الصور المصغرة النشطة
+      document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+      });
+      
+      currentImageIndex = index;
+    }
+
+    // عرض تفاصيل المنتج في المودال
+    function showProductDetails(productId) {
+      const product = products.find(item => item.id == productId);
+      currentImageIndex = 0;
+      
+      modalBody.innerHTML = `
+        <div class="product-details">
+          <div class="product-gallery">
+            <div class="main-image">
+              <img src="${product.images[0]}" alt="${currentLanguage === 'ar' ? product.title : product.title_en}">
+              <div class="gallery-nav">
+                <button class="gallery-nav-btn prev-btn"><i class="fas fa-chevron-right"></i></button>
+                <button class="gallery-nav-btn next-btn"><i class="fas fa-chevron-left"></i></button>
+              </div>
+            </div>
+            <div class="thumbnail-container">
+              ${product.images.map((img, index) => `
+                <div class="thumbnail ${index === 0 ? 'active' : ''}" data-index="${index}">
+                  <img src="${img}" alt="${currentLanguage === 'ar' ? product.title : product.title_en} - ${index + 1}">
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="product-info">
+            <h1 class="product-title">${currentLanguage === 'ar' ? product.title : product.title_en}</h1>
+            <div class="product-price">${product.price} ${currentLanguage === 'ar' ? 'درهم' : 'MAD'}</div>
+            <p class="product-description">${currentLanguage === 'ar' ? product.description : product.description_en}</p>
+            
+            ${product.colors ? `
+            <div class="product-options">
+              <div class="option-group">
+                <span class="option-title" data-i18n="color">${currentLanguage === 'ar' ? 'اللون:' : 'Color:'}</span>
+                <div class="color-options">
+                  ${product.colors.map(color => `
+                    <div class="color-option ${color} ${product.colors[0] === color ? 'active' : ''}" 
+                         style="background: ${color}" 
+                         data-color="${color}"></div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+            ` : ''}
+            
+            ${product.sizes ? `
+            <div class="option-group">
+              <span class="option-title" data-i18n="size">${currentLanguage === 'ar' ? 'المقاس:' : 'Size:'}</span>
+              <div class="size-options">
+                ${product.sizes.map(size => `
+                  <div class="size-option ${product.sizes[0] === size ? 'active' : ''}" 
+                       data-size="${size}">${size}</div>
+                `).join('')}
+              </div>
+            </div>
+            ` : ''}
+            
+            <button class="add-to-cart-modal" data-id="${product.id}" data-i18n="${cart.some(item => item.id == product.id) ? 'added_to_cart' : 'add_to_cart'}">
+              ${cart.some(item => item.id == product.id) ? (currentLanguage === 'ar' ? 'تمت الإضافة إلى السلة' : 'Added to Cart') : (currentLanguage === 'ar' ? 'أضف إلى السلة' : 'Add to Cart')}
+            </button>
+          </div>
+        </div>
+      `;
+      
+      productModal.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // أحداث التنقل بين الصور
+      const prevBtn = document.querySelector('.prev-btn');
+      const nextBtn = document.querySelector('.next-btn');
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      
+      prevBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + product.images.length) % product.images.length;
+        changeMainImage(product.images, currentImageIndex);
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % product.images.length;
+        changeMainImage(product.images, currentImageIndex);
+      });
+      
+      thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          const index = parseInt(thumb.dataset.index);
+          changeMainImage(product.images, index);
+        });
+      });
+      
+      // تحديث النصوص المترجمة
+      updateTranslations();
+    }
+
+    // إرسال الطلب عبر واتساب
+    function sendWhatsAppOrder() {
+      if (cart.length === 0) {
+        showAlert(currentLanguage === 'ar' ? 'السلة فارغة، أضف منتجات أولاً' : 'Cart is empty, add products first', 'error');
+        return;
+      }
+      
+      let message = currentLanguage === 'ar' ? 
+        'مرحباً، أريد طلب المنتجات التالية:\n\n' : 
+        'Hello, I would like to order the following products:\n\n';
+      
+      cart.forEach(item => {
+        message += `- ${currentLanguage === 'ar' ? item.title : item.title_en} (${item.quantity} × ${item.price} ${currentLanguage === 'ar' ? 'درهم' : 'MAD'})\n`;
+      });
+      
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      message += `\n${currentLanguage === 'ar' ? 'المجموع:' : 'Total:'} ${total} ${currentLanguage === 'ar' ? 'درهم' : 'MAD'}\n\n`;
+      message += currentLanguage === 'ar' ? 'شكراً لكم!' : 'Thank you!';
+      
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/+212782738492?text=${encodedMessage}`, '_blank');
+    }
+
+    // تبديل اللغة
+    function switchLanguage(lang) {
+      currentLanguage = lang;
+      
+      // تغيير اتجاه الصفحة حسب اللغة
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      
+      // تحديث أزرار اللغة
+      langButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      
+      // إعادة عرض المحتوى باللغة الجديدة
+      renderProducts();
+      renderCartItems();
+      updateTranslations();
+      
+      showAlert(lang === 'ar' ? 'تم التغيير إلى اللغة العربية' : 'Switched to English', 'success');
+    }
+
+    // تحديث النصوص المترجمة في الصفحة
+    function updateTranslations() {
+      const elements = document.querySelectorAll('[data-i18n]');
+      
+      elements.forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[currentLanguage][key]) {
+          element.textContent = translations[currentLanguage][key];
+        }
+      });
+    }
+
+    // عرض الصفحة المطلوبة
+    function showPage(pageId) {
+      // إخفاء جميع الصفحات
+      document.querySelectorAll('[id$="-page"]').forEach(page => {
+        page.style.display = 'none';
+      });
+      
+      // إظهار الصفحة المطلوبة
+      const pageToShow = document.getElementById(pageId);
+      if (pageToShow) {
+        pageToShow.style.display = 'block';
+        
+        // إذا كانت الصفحة الرئيسية، أظهر السيكشن المناسب
+        if (pageId === 'home-page') {
+          window.location.hash = '';
+          document.querySelector('.hero').style.display = 'flex';
+          document.querySelector('.products').style.display = 'block';
+        }
+      }
+      
+      // إغلاق القوائم الجانبية إذا كانت مفتوحة
+      cartSidebar.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      
+      // تحديث النصوص المترجمة
+      updateTranslations();
+    }
+    
+    // التعامل مع الروابط في القوائم
+    function handleNavLinks() {
+      // روابط القائمة الرئيسية
+      document.querySelectorAll('.nav-links a, .mobile-menu-links a, .footer-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = link.getAttribute('href');
+          
+          if (target === '#home') {
+            showPage('home-page');
+          } else if (target === '#about') {
+            showPage('about-page');
+          } else if (target === '#terms') {
+            showPage('terms-page');
+          } else if (target === '#contact') {
+            showPage('contact-page');
+          } else if (target === '#products') {
+            showPage('home-page');
+            setTimeout(() => {
+              document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          }
+        });
+      });
+    }
+
+    // أحداث DOM
+    // النقر على أيقونة السلة
+    cartIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      cartSidebar.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // إغلاق السلة
+    closeCartBtn.addEventListener('click', () => {
+      cartSidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    // النقر على الأوفرلاي
+    overlay.addEventListener('click', () => {
+      cartSidebar.classList.remove('active');
+      productModal.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    // إغلاق المودال
+    closeModalBtn.addEventListener('click', () => {
+      productModal.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    // النقر على زر الطلب عبر واتساب
+    whatsappCheckoutBtn.addEventListener('click', sendWhatsAppOrder);
+
+    // أحداث المنتجات
+    productsGrid.addEventListener('click', (e) => {
+      const addToCartBtn = e.target.closest('.add-to-cart');
+      const viewDetailsBtn = e.target.closest('.view-details');
+      const productCard = e.target.closest('.product-card');
+      
+      if (addToCartBtn) {
+        e.preventDefault();
+        const productId = productCard.dataset.id;
+        addToCart(productId);
+        
+        // تأثير الرقص للأيقونة
+        cartIcon.classList.add('dance');
+        setTimeout(() => {
+          cartIcon.classList.remove('dance');
+        }, 500);
+      }
+      
+      if (viewDetailsBtn) {
+        e.preventDefault();
+        const productId = productCard.dataset.id;
+        showProductDetails(productId);
+      }
+    });
+
+    // أحداث السلة
+    cartItemsEl.addEventListener('click', (e) => {
+      const removeBtn = e.target.closest('.cart-item-remove');
+      const plusBtn = e.target.closest('.plus');
+      const minusBtn = e.target.closest('.minus');
+      
+      if (removeBtn) {
+        e.preventDefault();
+        const productId = removeBtn.dataset.id;
+        removeFromCart(productId);
+      }
+      
+      if (plusBtn) {
+        e.preventDefault();
+        const productId = plusBtn.dataset.id;
+        changeQuantity(productId, 'plus');
+      }
+      
+      if (minusBtn) {
+        e.preventDefault();
+        const productId = minusBtn.dataset.id;
+        changeQuantity(productId, 'minus');
+      }
+    });
+
+    // أحداث المودال
+    modalBody.addEventListener('click', (e) => {
+      const colorOption = e.target.closest('.color-option');
+      const sizeOption = e.target.closest('.size-option');
+      const addToCartModalBtn = e.target.closest('.add-to-cart-modal');
+      
+      if (colorOption) {
+        e.preventDefault();
+        document.querySelectorAll('.color-option').forEach(opt => {
+          opt.classList.remove('active');
+        });
+        colorOption.classList.add('active');
+      }
+      
+      if (sizeOption) {
+        e.preventDefault();
+        document.querySelectorAll('.size-option').forEach(opt => {
+          opt.classList.remove('active');
+        });
+        sizeOption.classList.add('active');
+      }
+      
+      if (addToCartModalBtn) {
+        e.preventDefault();
+        const productId = addToCartModalBtn.dataset.id;
+        addToCart(productId);
+        addToCartModalBtn.textContent = currentLanguage === 'ar' ? 'تمت الإضافة إلى السلة' : 'Added to Cart';
+        
+        // تأثير الرقص للأيقونة
+        cartIcon.classList.add('dance');
+        setTimeout(() => {
+          cartIcon.classList.remove('dance');
+        }, 500);
+      }
+    });
+
+    // أحداث أزرار اللغة
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchLanguage(btn.dataset.lang);
+      });
+    });
+
+    // أحداث القائمة المتنقلة
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      mobileMenu.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeMobileMenuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      mobileMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    // التعامل مع تغيير الهاش
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === '#about') {
+        showPage('about-page');
+      } else if (window.location.hash === '#terms') {
+        showPage('terms-page');
+      } else if (window.location.hash === '#contact') {
+        showPage('contact-page');
+      } else if (window.location.hash === '#products') {
+        showPage('home-page');
+        setTimeout(() => {
+          document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else {
+        showPage('home-page');
+      }
+    });
+
+    // إضافة بعض الأنماط الإضافية للتنبيهات
+    const style = document.createElement('style');
+    style.textContent = `
+      .top-alert {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        text-align: center;
+        z-index: 10000;
+        animation: slideDown 0.3s ease-out;
+      }
+      
+      .top-alert.success {
+        background: var(--success);
+        color: white;
+      }
+      
+      .top-alert.error {
+        background: var(--accent);
+        color: white;
+      }
+      
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
